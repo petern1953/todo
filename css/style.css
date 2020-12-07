@@ -1,0 +1,86 @@
+:root {
+    --grey: #666;
+    --darkgrey: #444;
+    --red: rgb(251, 110, 83);
+    --white: #eee;
+    --font: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    }
+
+body {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: var(--font);
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.container {
+    width: 420px;
+    background-color: var(--red);
+    margin: 0 auto;
+    padding-bottom: 30px;
+}
+
+h1 {
+    color: var(--white);
+    text-align: center;
+    font-size: 1.8rem;
+    line-height: 3rem;
+    margin-bottom: 6px;
+    padding-bottom: 0;
+}
+
+.inner {
+    background-color: var(--white);
+    width: 78%;
+    margin: 0 auto;
+    padding: 30px 15px 20px;
+    border-radius: 3px;
+}
+
+.date {
+    font-size: 1.1rem;
+    color: var(--red);
+}
+
+.pending, .completed_percent, .commands button {
+    font-size: 1rem;
+    color: var(--grey);
+}
+
+.commands {
+    width: 60%;
+    position: relative;
+    margin: 0 auto;
+}
+
+.commands button {
+    font-family: var(--font);
+    font-size: .95rem;
+    font-weight: 800;
+    padding: 15px 12px 0;
+    border: hidden;
+    background-color: var(--white);
+}
+
+.instruction input {
+    width: 85%;
+    padding: 4px;
+    font-style: italic;
+}
+
+.instruction button {
+    height: 28px;
+    width: 28px;
+    margin-left: 4px;
+}
+
+.todo, .completed {
+    display: block;
+    width: 80%;
+    height: 18px;
+    padding: 4px 80% 4px 10%;
+    background-color: var(--darkgrey);
+    border-radius: 3px;
+}
