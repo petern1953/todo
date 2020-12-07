@@ -44,12 +44,15 @@ h1 {
     color: var(--red);
 }
 
+.tasks {
+}
+
 .pending, .completed_percent, .commands button {
     font-size: 1rem;
     color: var(--grey);
 }
 
-.commands {
+.commands, .no-todos {
     width: 60%;
     position: relative;
     margin: 0 auto;
@@ -62,6 +65,11 @@ h1 {
     padding: 15px 12px 0;
     border: hidden;
     background-color: var(--white);
+}
+
+.instruction {
+    display: flex;
+    justify-content: space-between;
 }
 
 .instruction input {
@@ -83,4 +91,17 @@ h1 {
     padding: 4px 80% 4px 10%;
     background-color: var(--darkgrey);
     border-radius: 3px;
+}
+
+.no-todos {
+    font-size: .9rem;
+    color: var(--darkgrey);
+}
+
+.hidden {
+    display: none;
+}
+
+.no-todos img {
+    width: 100%;
 }
