@@ -87,6 +87,7 @@ section {
     width: 85%;
     padding: 4px;
     font-style: italic;
+
 }
 
 .instruction-div button {
@@ -155,7 +156,7 @@ section {
 .completed .todo {
     /* list-style: none; */
     background-color: var(--white);
-    margin-bottom: 6px;
+    margin-bottom: 8px;
     border-radius: 3px;
 }
 
@@ -191,9 +192,9 @@ section {
     margin: 0;
     width: 81%;
     font-size: .9rem;
-    font-weight: 400;
+    font-weight: 500;
     text-decoration: line-through;
-    color: var(--grey);
+    color: var(--middlegrey);
 }
 
 .pending .todo .fa-check::before {
@@ -222,6 +223,7 @@ section {
     font-size: .7rem;
     border-radius: 0 3px 3px 0;
     color: var(--white);
+    cursor: pointer;
 }
 
 .pending .todo .fa-trash.hidden::before {
