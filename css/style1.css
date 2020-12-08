@@ -36,10 +36,8 @@ h1 {
 }
 
 .inner {
-    display: block;
     background-color: var(--light);
     width: 78%;
-    height: auto;
     margin: 0 auto;
     padding: 30px 15px 20px;
     border-radius: 3px;
@@ -51,21 +49,16 @@ h1 {
 }
 
 .tasks {
-    display: block;
 }
 
-.pending_items, .completed_percent, .commands button {
+.pending, .completed_percent, .commands button {
     font-size: 1rem;
     color: var(--darkgrey);
 }
 
-section {
-    display: block;
-}
-
 .commands, .no-todos {
     width: 60%;
-    /* position: relative; */
+    position: relative;
     margin: 0 auto;
 }
 
@@ -108,14 +101,14 @@ section {
     border-radius: 3px;
 }
 
-/* .todo, .completed {
+.todo, .completed {
     display: block;
     width: 80%;
     height: 18px;
     padding: 4px 80% 4px 10%;
     background-color: var(--darkgrey);
     border-radius: 3px;
-} */
+}
 
 .no-todos {
     font-size: .9rem;
@@ -130,104 +123,93 @@ section {
     width: 100%;
 }
 
-.todos {
-    display: block;
-    width: 100%;
+ul {
     padding: 0;
 }
 
-.todo {
+li {
     list-style: none;
-    width: 100%;
-    height: 30px;
-    padding: 0px;
-    /* display: inline-block; */
-    display: block;
-}
-
-.pending .todo {
-    /* list-style: none; */
     background-color: var(--grey);
     margin-bottom: 8px;
     border-radius: 3px;
 }
 
-.completed .todo {
-    /* list-style: none; */
-    background-color: var(--white);
-    margin-bottom: 6px;
-    border-radius: 3px;
-}
-
-.pending .checkbox {
+li input {
     display: inline-block;
-    margin: 8px 2px 8px 8px;
-    padding: 8px 0 8px;
+    /* margin: 8px auto 8px 8px; */
+    margin: 8px;
+    padding: 8px;
     border: 1px solid var(--grey);
 }
 
-.completed .checkbox {
-    display: none;
-    margin: 8px 2px 8px 8px;
-    padding: 8px 0 8px;
-    border: 1px solid var(--grey);
-}
-
-.pending p {
+li p {
     display: inline-block;
     position: relative;
     top: -3px;
     margin: 0;
-    width: 81%;
+    width: 80.8%;
     font-size: .9rem;
-    font-weight: 400;
     color: var(--darkgrey);
 }
 
-.completed p {
-    display: inline-block;
+/* li i::before { */
+.todo-list i::before {
     position: relative;
-    top: 4px;
+    top: -3px;
     margin: 0;
-    width: 81%;
-    font-size: .9rem;
-    font-weight: 400;
-    text-decoration: line-through;
-    color: var(--grey);
-}
-
-.pending .todo .fa-check::before {
-    display: none;
-}
-
-.completed .todo .fa-check::before {
-    position: relative;
-    top: 5px;
-    margin: 8px;
-    padding: 2px;
-    background-color: var(--white);
-    font-size: .7rem;
-    border: 1px solid var(--grey);
-    border-radius: 0 3px 3px 0;
-    color: var(--red);
-}
-
-.pending .todo .fa-trash::before {
-    /* display: inline-block; */
-    position: relative;
-    top: -2px;
-    margin: 0;
-    padding: 9px 11px 9px;
+    padding: 8px 11px 9px;
     background-color: var(--red);
     font-size: .7rem;
     border-radius: 0 3px 3px 0;
     color: var(--white);
 }
 
-.pending .todo .fa-trash.hidden::before {
-    display: none;
+#instruction i {
+    position: relative;
+    margin: 0;
+    padding: 8px 11px 9px;
+    background-color: var(--red);
+    font-size: .7rem;
+    border-radius: 0 3px 3px 0;
+    color: var(--white);
 }
 
-.completed .todo .fa-trash::before {
+#instruction i::before {
+    color: var(--white);
+}
+
+.completeds li {
+    background-color: var(--white);
+}
+
+.completeds p {
+text-decoration: line-through;
+color: var(--middlegrey );
+}
+
+.completed-check {
     display: none;
+} 
+
+.completed-list {
+    width: 100%;
+    height: 28px;
+}
+
+.completed-list i:before {
+    padding: 0;
+    color: var(--red);
+    position: relative;
+    top: 6px;
+    width: 36px;
+
+        /* position: relative;
+    top: -3px;
+    margin: 0;
+    padding: 8px 11px 9px;
+    background-color: var(--red);
+    font-size: .7rem;
+    border-radius: 0 3px 3px 0;
+    color: var(--white); */
+
 }

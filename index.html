@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>To do list manager</title>
     <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/node_modules/font-awesome/css/font-awesome.min.css">
 </head>
 
 <body>
@@ -15,30 +16,73 @@
     <h1>Daily To-Do list manager</h1>
     <div class="inner">
         <h3 class="date">Thursday<br>10-15-2020</h3>
-        <div class="instruction">
+        <header class="instruction-div">
             <input type="text" name="" id="instruction" placeholder="Take the garbage out">
-            <button>+</button>
-        </div>
-        <div class="tasks">
-            <p class="pending">You have <span>2</span> pending items</p>
-            <form action="" class="todos">
-                <input class="todo" type="checkbox" name="" id="" placeholder="trezue">
-                <input class="todo" type="checkbox" name="" id="" placeholder="ourew">
-            </form>
+            <button><i class="fa fa-plus"></i></button>
+
+            <!-- <button class="add-todo"><i class="fa fa-plus"></i></button> -->
+        </header>
+        <main class="tasks">
+            <p class="pending_items">You have <span>2</span> pending items</p>
+            <!-- <ul class="todos"> -->
+            <ul class="pending todos">
+                <li class="todo">
+                    <input class="checkbox" type="checkbox" disabled>
+                    <i class="fa fa-check"></i>
+                    <p>gfgfjhgj</p>
+                    <i class="fa fa-trash hidden"></i>
+                </li>
+                <li class="todo">
+                    <input class="checkbox" type="checkbox" disabled>
+                    <i class="fa fa-check"></i>
+                    <p>poipoiztruezw</p>
+                    <i class="fa fa-trash"></i>
+                </li>
+                <li class="todo">
+                    <input class="checkbox" type="checkbox" disabled>
+                    <i class="fa fa-check"></i>
+                    <p>poipoiztruezw</p>
+                    <i class="fa fa-trash"></i>
+                </li>
+                <li class="todo">
+                    <input class="checkbox" type="checkbox" disabled>
+                    <i class="fa fa-check"></i>
+                    <p>poipoiztruezw</p>
+                    <i class="fa fa-trash"></i>
+                </li>
+                <li class="todo">
+                    <input class="checkbox" type="checkbox" disabled>
+                    <i class="fa fa-check"></i>
+                    <p>poipoiztruezw</p>
+                    <i class="fa fa-trash"></i>
+                </li>
+            </ul>
             <p class="completed_percent">Completed tasks: <span>50</span>%</p>
-            <form action="" class="completeds">
-                <input class="completed" type="checkbox" name="" id="" placeholder="sdf">
-                <input class="completed" type="checkbox" name="" id="" placeholder="ghtre">
-            </form>
-            <div class="commands">
-                <button><span>Hide </span>Complete</button>
-                <button>Clear All</button>
-            </div>
-            <div class="no-todos hidden">
-                <img src="/img/chill.png" alt="chill">
-                <p>Time to chill! You have no todos.</p>
-            </div>
+            <ul class="completed todos">
+                <li class="todo">
+                    <input class="checkbox" type="checkbox">
+                    <i class="fa fa-check"></i>
+                    <p>sdfpankzx</p>
+                    <i class="fa fa-trash"></i>
+                </li>
+                <li class="todo">
+                    <input class="checkbox" type="checkbox">
+                    <i class="fa fa-check"></i>
+                    <p>sdfpankzx</p>
+                    <i class="fa fa-trash"></i>
+                </li>
+            </ul>
+        </main>
+        <!-- <section> -->
+        <div class="commands">
+            <button><span>Hide </span>Complete</button>
+            <button>Clear All</button>
         </div>
+        <!-- </section> -->
+        <footer class="no-todos hidden">
+            <img src="/img/chill.png" alt="chill">
+            <p>Time to chill! You have no todos.</p>
+        </footer>
 
     </div>
 
