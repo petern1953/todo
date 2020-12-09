@@ -27,6 +27,35 @@ const fillInDate = () => {
 
 const pendingToDos = document.querySelector('.pending.todos');
 const completedToDos = document.querySelector('.completed.todos');
+const instruction = document.querySelector('#instruction');
+const plusButton = document.querySelector('.instruction-div button');
+const pendingToDosList = document.querySelector('.pending.todos');
+
+let newToDo;
+const getNewToDo = () => {
+    return instruction.value;
+};
+
+const clearToDoInputField = () => {
+    instruction.value = '';
+    newToDo = '';
+};
+
+const showBid = (event) => {
+    event.target.children[3].classList.remove('hidden');
+    // console.log(event.target.children[3].classList);
+}
+
+const hideBid = (event) => {
+    event.target.children[3].classList.add('hidden');
+    // console.log(event.target.children[3].classList);
+}
+const activateBid = () => {
+    const pendigToDoItems = document.querySelectorAll('.pending .todo');
+
+    pendigToDoItems.forEach(item => item.addEventListener('mouseenter', showBid));
+    // pendigToDoItems.forEach(item => item.addEventListener('mouseleave', hideBid));
+}
 
 let pendingToDosArray = [];
 let completedToDosArray = [];
@@ -37,15 +66,49 @@ const getTodos = () => {
     completedToDosArray = JSON.parse(localStorage.getItem('completedToDos'));
 }
 
-const fillInToDos = (todoArray, status) => {
-    if (status === 'pending') {
-
-    }
+const makeListItem = (toDo) => {
+    return `<li class="todo">
+        <input class="checkbox" type="checkbox">
+        <i class="fa fa-check"></i><p>${toDo}</p><i class="fa fa-trash hidden"></i>
+    </li>`;
 }
+
+const fillInToDo = (toDo, status) => {
+    const toDoHTML = makeListItem(toDo);
+    if (status === 'pending') {
+        pendingToDosList.innerHTML = toDoHTML + pendingToDosList.innerHTML;
+    } else completedToDosList.innerHTML = toDoHTML + completedToDosList.innerHTML;
+};
+
+const fillInToDos = () => {
+    pendingToDosArray.forEach(todo => fillInToDo(todo, 'pending'));
+    completedToDosArray.forEach(todo => fillInToDo(todo, 'completed'));
+};
+
+// toDO: check these if needed at all
+//
+const showNewToDo = newToDo => {
+    const toDoHTML =
+        `<li class="todo">
+        <input class="checkbox" type="checkbox">
+        <i class="fa fa-check"></i><p>${newToDo}</p><i class="fa fa-trash"></i>
+    </li>`;
+    pendingToDosList.innerHTML = toDoHTML + pendingToDosList.innerHTML;
+}
+
+const handleNewToDo = () => {
+    newToDo = getNewToDo();
+    showNewToDo(newToDo);
+    clearToDoInputField();
+    activateBid();
+}
+activateBid();
+plusButton.addEventListener('click', handleNewToDo);
 
 const todoManager = () => {
     fillInDate();
     getTodos();
+    fillInToDos();
 }
 
 
