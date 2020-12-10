@@ -34,9 +34,6 @@ const completedToDosList = document.querySelector('.completed.todos');
 const instruction = document.querySelector('#instruction');
 const plusButton = document.querySelector('.instruction-div button');
 
-
-
-
 let newToDo;
 const getNewToDo = () => {
     return instruction.value;
@@ -56,7 +53,13 @@ const hideBid = (event) => {
     event.target.children[3].classList.add('hidden');
     // console.log(event.target.children[3].classList);
 }
-const activateBid = () => {
+
+const activateBid = (toDoItem) => {
+    toDoItem.addEventListener('mouseenter', showBid);
+    toDoItem.addEventListener('mouseleave', hideBid);
+}
+
+const activateBids = () => {
     const pendigToDoItems = document.querySelectorAll('.pending .todo');
 
     pendigToDoItems.forEach(item => item.addEventListener('mouseenter', showBid));
@@ -85,6 +88,7 @@ const makeListItem = (toDo) => {
     toDoElement.innerHTML =
         `<input class="checkbox" type="checkbox">
         <i class="fa fa-check"></i><p>${toDo}</p><i class="fa fa-trash hidden"></i>`;
+    activateBid(toDoElement);
     return toDoElement;
 }
 
@@ -120,9 +124,9 @@ const handleNewToDo = () => {
     newToDo = getNewToDo();
     showNewToDo(newToDo);
     clearToDoInputField();
-    activateBid();
+    activateBids();
 }
-activateBid();
+activateBids();
 plusButton.addEventListener('click', handleNewToDo);
 
 
