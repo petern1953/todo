@@ -25,12 +25,13 @@ const fillInDate = () => {
     date.innerHTML = dateString;
 }
 
-const pendingToDos = document.querySelector('.pending.todos');
-const completedToDos = document.querySelector('.completed.todos');
+// const pendingToDos = document.querySelector('.pending.todos');
+const pendingToDosList = document.querySelector('.pending.todos');
+// const completedToDos = document.querySelector('.completed.todos');
+const completedToDosList = document.querySelector('.completed.todos');
 const instruction = document.querySelector('#instruction');
 const plusButton = document.querySelector('.instruction-div button');
 
-const pendingToDosList = document.querySelector('.pending.todos');
 
 let newToDo;
 const getNewToDo = () => {
