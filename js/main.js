@@ -92,7 +92,7 @@ const makeToDoCompleted = () => {
 // toDO: complete
 const activateCheckBox = (checkBox) => {
     checkBox.onclick = function () {
-        console.log(this);
+        console.log(this.parentElement);
         // if (this.checked) {
         //     console.log(this);
         // makeToDoCompleted();
@@ -193,7 +193,7 @@ const handleNewToDo = () => {
     fillInToDoInfo();
     clearToDoInputField();
     activateBids();
-    activateCheckBox();
+    activateCheckBoxes();
 }
 activateBids();
 plusButton.addEventListener('click', handleNewToDo);
