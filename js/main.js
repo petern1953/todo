@@ -58,15 +58,13 @@ const updateToDosArray = (toDo, status, action) => {
         else {
             // meg kell keresni a tömbben, és törölni belőle
         }
-
     }
-
 };
 
 let newToDo;
 const getNewToDo = () => {
     const newToDo = instruction.value;
-    updateToDosArray(newToDo, 'pending', 'insert');
+    // updateToDosArray(newToDo, 'pending', 'insert');
     return newToDo;
 };
 
