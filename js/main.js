@@ -34,8 +34,7 @@ const completedToDosList = document.querySelector('.completed.todos');
 const instruction = document.querySelector('#instruction');
 const plusButton = document.querySelector('.instruction-div button');
 
-// const liElement = document.createElement('li');
-const toDoElement = document.createElement('li').classList.add('todo');
+
 
 
 let newToDo;
@@ -71,15 +70,22 @@ const getTodos = () => {
     pendingToDosArray = JSON.parse(localStorage.getItem('pendingToDos'));
     completedToDosArray = JSON.parse(localStorage.getItem('completedToDos'));
 }
+const createToDoElement = () => {
+    const toDoElement = document.createElement('li');
+    toDoElement.classList.add('todo');
+    return toDoElement;
+}
 
 const makeListItem = (toDo) => {
     // return `<li class="todo">
     //     <input class="checkbox" type="checkbox">
     //     <i class="fa fa-check"></i><p>${toDo}</p><i class="fa fa-trash hidden"></i>
     // </li>`;
-    return toDoElement.innerHTML =
+    const toDoElement = createToDoElement();
+    toDoElement.innerHTML =
         `<input class="checkbox" type="checkbox">
-        <i class="fa fa-check"></i><p>${toDo}</p><i class="fa fa-trash hidden"></i>`
+        <i class="fa fa-check"></i><p>${toDo}</p><i class="fa fa-trash hidden"></i>`;
+    return toDoElement;
 }
 
 const fillInToDo = (toDo, status) => {
@@ -88,7 +94,9 @@ const fillInToDo = (toDo, status) => {
         pendingToDosList.insertBefore(toDoHTML, pendingToDosList.firstElementChild);
         // pendingToDosList.innerHTML = toDoHTML + pendingToDosList.innerHTML;
     } else {
-        completedToDosList.innerHTML = toDoHTML + completedToDosList.innerHTML
+        // completedToDosList.innerHTML = toDoHTML + completedToDosList.innerHTML;
+        completedToDosList.insertBefore(toDoHTML, completedToDosList.firstElementChild);
+
     };
 };
 
