@@ -15,15 +15,9 @@
 
 'use strict';
 
-const fillInDate = () => {
-    const date = document.querySelector('.date');
-    const now = new Date();
-    const options = { weekday: 'long', year: 'numeric', month: 'numeric', day: 'numeric' };
-    const dateString = now.toLocaleDateString('en-GB', options)
-        .replace(', ', '<br>')
-        .replace(/\//g, '-');
-    date.innerHTML = dateString;
-}
+const pendingToDoListName = 'pendingToDos';
+const completedToDoListName = 'completedToDos';
+const pendingItemsNumber = document.querySelector('.pending_items .number');
 
 // pendingToDos Root
 // const pendingToDos = document.querySelector('.pending.todos');
@@ -34,9 +28,46 @@ const completedToDosList = document.querySelector('.completed.todos');
 const instruction = document.querySelector('#instruction');
 const plusButton = document.querySelector('.instruction-div button');
 
+let pendingToDosArray = [];
+let completedToDosArray = [];
+
+const fillInDate = () => {
+    const date = document.querySelector('.date');
+    const now = new Date();
+    const options = { weekday: 'long', year: 'numeric', month: 'numeric', day: 'numeric' };
+    const dateString = now.toLocaleDateString('en-GB', options)
+        .replace(', ', '<br>')
+        .replace(/\//g, '-');
+    date.innerHTML = dateString;
+};
+
+const fillInToDoInfo = () => {
+    pendingItemsNumber.textContent = pendingToDosArray.length;
+};
+
+// status: pending / completed, action: insert / delete
+const updateToDosArray = (toDo, status, action) => {
+    if (status === 'pending') {
+        if (action === 'insert') pendingToDosArray.unshift(toDo);
+        else {
+            // meg kell keresni a tömbben, és törölni belőle
+        }
+    } else {
+        // completed
+        if (action === 'insert') completedToDosArray.unshift(toDo);
+        else {
+            // meg kell keresni a tömbben, és törölni belőle
+        }
+
+    }
+
+};
+
 let newToDo;
 const getNewToDo = () => {
-    return instruction.value;
+    const newToDo = instruction.value;
+    updateToDosArray(newToDo, 'pending', 'insert');
+    return newToDo;
 };
 
 const clearToDoInputField = () => {
@@ -66,12 +97,12 @@ const activateBids = () => {
     pendigToDoItems.forEach(item => activateBid(item));
 }
 
-let pendingToDosArray = [];
-let completedToDosArray = [];
-
 const getTodos = () => {
-    pendingToDosArray = JSON.parse(localStorage.getItem('pendingToDos'));
-    completedToDosArray = JSON.parse(localStorage.getItem('completedToDos'));
+    const pending = localStorage.getItem(pendingToDoListName);
+    pendingToDosArray = pending ? JSON.parse(pending) : [];
+    const completed = localStorage.getItem(completedToDoListName);
+    completedToDosArray = completed ? JSON.parse(completed) : [];
+    // JSON.parse(localStorage.getItem(completedToDoListName));
 }
 const createToDoElement = () => {
     const toDoElement = document.createElement('li');
@@ -100,14 +131,23 @@ const fillInToDo = (toDo, status) => {
     } else {
         // completedToDosList.innerHTML = toDoHTML + completedToDosList.innerHTML;
         completedToDosList.insertBefore(toDoHTML, completedToDosList.firstElementChild);
-
     };
 };
 
 const fillInToDos = () => {
-    pendingToDosArray.forEach(todo => fillInToDo(todo, 'pending'));
-    completedToDosArray.forEach(todo => fillInToDo(todo, 'completed'));
+    if (pendingToDosArray.length > 0) pendingToDosArray.forEach(todo => fillInToDo(todo, 'pending'));
+    if (completedToDosArray.length > 0) completedToDosArray.forEach(todo => fillInToDo(todo, 'completed'));
 };
+
+const storeToDos = (toDo, status) => {
+    if (status === 'pending' || status === '') {
+        updateToDosArray(toDo, status, 'insert');
+        localStorage.setItem(pendingToDoListName, JSON.stringify(pendingToDosArray));
+    }
+    if (status === 'completed' || status === '')
+        localStorage.setItem(completedToDoListName, JSON.stringify(completedToDosArray));
+    // localStorage.setItem(JSON.stringify(completedToDoListName, completedToDosArray));
+}
 
 // toDO: check these if needed at all
 //
@@ -123,6 +163,8 @@ const showNewToDo = newToDo => {
 const handleNewToDo = () => {
     newToDo = getNewToDo();
     showNewToDo(newToDo);
+    storeToDos(newToDo, 'pending');
+    fillInToDoInfo();
     clearToDoInputField();
     activateBids();
 }
@@ -135,8 +177,9 @@ plusButton.addEventListener('click', handleNewToDo);
     fillInDate();
     getTodos();
     fillInToDos();
+    fillInToDoInfo();
 })();
 
 // just for test
-localStorage.setItem('pendingToDos', JSON.stringify(['enni', 'inni', 'aludni']));
+localStorage.setItem(pendingToDoListName, JSON.stringify(['enni', 'inni', 'aludni']));
 localStorage.setItem('completedToDos', JSON.stringify(['programozás', 'bevásárlás', 'séta']));
