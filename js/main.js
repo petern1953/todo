@@ -61,9 +61,9 @@ const activateBid = (toDoItem) => {
 
 const activateBids = () => {
     const pendigToDoItems = document.querySelectorAll('.pending .todo');
-
-    pendigToDoItems.forEach(item => item.addEventListener('mouseenter', showBid));
+    // pendigToDoItems.forEach(item => item.addEventListener('mouseenter', showBid));
     // pendigToDoItems.forEach(item => item.addEventListener('mouseleave', hideBid));
+    pendigToDoItems.forEach(item => activateBid(item));
 }
 
 let pendingToDosArray = [];
