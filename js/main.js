@@ -25,12 +25,17 @@ const fillInDate = () => {
     date.innerHTML = dateString;
 }
 
+// pendingToDos Root
 // const pendingToDos = document.querySelector('.pending.todos');
 const pendingToDosList = document.querySelector('.pending.todos');
+// completedToDos Root
 // const completedToDos = document.querySelector('.completed.todos');
 const completedToDosList = document.querySelector('.completed.todos');
 const instruction = document.querySelector('#instruction');
 const plusButton = document.querySelector('.instruction-div button');
+
+// const liElement = document.createElement('li');
+const toDoElement = document.createElement('li').classList.add('todo');
 
 
 let newToDo;
@@ -62,7 +67,6 @@ const activateBid = () => {
 let pendingToDosArray = [];
 let completedToDosArray = [];
 
-
 const getTodos = () => {
     pendingToDosArray = JSON.parse(localStorage.getItem('pendingToDos'));
     completedToDosArray = JSON.parse(localStorage.getItem('completedToDos'));
@@ -78,8 +82,11 @@ const makeListItem = (toDo) => {
 const fillInToDo = (toDo, status) => {
     const toDoHTML = makeListItem(toDo);
     if (status === 'pending') {
-        pendingToDosList.innerHTML = toDoHTML + pendingToDosList.innerHTML;
-    } else completedToDosList.innerHTML = toDoHTML + completedToDosList.innerHTML;
+        pendingToDosList.insertBefore(toDoHTML, pendingToDosList.firstElementChild);
+        // pendingToDosList.innerHTML = toDoHTML + pendingToDosList.innerHTML;
+    } else {
+        completedToDosList.innerHTML = toDoHTML + completedToDosList.innerHTML
+    };
 };
 
 const fillInToDos = () => {
@@ -115,6 +122,6 @@ plusButton.addEventListener('click', handleNewToDo);
     fillInToDos();
 })();
 
-
+// just for test
 localStorage.setItem('pendingToDos', JSON.stringify(['enni', 'inni', 'aludni']));
 localStorage.setItem('completedToDos', JSON.stringify(['programozás', 'bevásárlás', 'séta']));
