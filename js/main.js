@@ -85,6 +85,14 @@ const hideBid = (event) => {
 // toDO: complete
 const makeToDoCompleted = (toDoRow) => {
     console.log(toDoRow, toDoRow.textContent.trim());
+    // take out toDoRow from pendingList
+    toDoRow.remove();
+    // take out from pendingarray
+    // put into completedList as first rows
+    // put into completedArray as first cell
+    // write all into localStorage
+    // update pending&completed info
+    // this one does not exist, toDO: create function completedInfo
 };
 
 // toDO: complete
