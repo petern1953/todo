@@ -82,6 +82,30 @@ const hideBid = (event) => {
     event.target.children[3].classList.add('hidden');
     // console.log(event.target.children[3].classList);
 }
+// toDO: complete
+const makeToDoCompleted = () => {
+
+};
+
+
+
+// toDO: complete
+const activateCheckBox = (checkBox) => {
+    checkBox.onclick = function () {
+        console.log(this);
+        // if (this.checked) {
+        //     console.log(this);
+        // makeToDoCompleted();
+        // }
+    };
+};
+// toDO: complete
+const activateCheckBoxes = () => {
+    const checkBoxes = document.querySelectorAll('.pending .todo .checkbox');
+    // pendigToDoItems.forEach(item => item.addEventListener('mouseenter', showBid));
+    // pendigToDoItems.forEach(item => item.addEventListener('mouseleave', hideBid));
+    checkBoxes.forEach(checkBox => activateCheckBox(checkBox));
+}
 
 const activateBid = (toDoItem) => {
     toDoItem.addEventListener('mouseenter', showBid);
@@ -159,16 +183,28 @@ const showNewToDo = newToDo => {
 }
 
 const handleNewToDo = () => {
-    newToDo = getNewToDo();
+    newToDo = getNewToDo().trim();
+    if (newToDo === '') {
+        clearToDoInputField();
+        return;
+    }
     showNewToDo(newToDo);
     storeToDos(newToDo, 'pending');
     fillInToDoInfo();
     clearToDoInputField();
     activateBids();
+    activateCheckBox();
 }
 activateBids();
 plusButton.addEventListener('click', handleNewToDo);
 
+const handleCompletedToDo = () => {
+
+};
+// const activateCheckBox = () => {
+//     const checkBox =
+//         checkBox.addEventListener
+// }
 
 // todoManager main
 (function () {
@@ -179,5 +215,5 @@ plusButton.addEventListener('click', handleNewToDo);
 })();
 
 // just for test
-localStorage.setItem(pendingToDoListName, JSON.stringify(['enni', 'inni', 'aludni']));
-localStorage.setItem('completedToDos', JSON.stringify(['programozás', 'bevásárlás', 'séta']));
+// localStorage.setItem(pendingToDoListName, JSON.stringify(['enni', 'inni', 'aludni']));
+// localStorage.setItem('completedToDos', JSON.stringify(['programozás', 'bevásárlás', 'séta']));
