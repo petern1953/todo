@@ -73,10 +73,13 @@ const getTodos = () => {
 }
 
 const makeListItem = (toDo) => {
-    return `<li class="todo">
-        <input class="checkbox" type="checkbox">
-        <i class="fa fa-check"></i><p>${toDo}</p><i class="fa fa-trash hidden"></i>
-    </li>`;
+    // return `<li class="todo">
+    //     <input class="checkbox" type="checkbox">
+    //     <i class="fa fa-check"></i><p>${toDo}</p><i class="fa fa-trash hidden"></i>
+    // </li>`;
+    return toDoElement.innerHTML =
+        `<input class="checkbox" type="checkbox">
+        <i class="fa fa-check"></i><p>${toDo}</p><i class="fa fa-trash hidden"></i>`
 }
 
 const fillInToDo = (toDo, status) => {
