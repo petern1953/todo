@@ -29,6 +29,7 @@ const pendingToDos = document.querySelector('.pending.todos');
 const completedToDos = document.querySelector('.completed.todos');
 const instruction = document.querySelector('#instruction');
 const plusButton = document.querySelector('.instruction-div button');
+
 const pendingToDosList = document.querySelector('.pending.todos');
 
 let newToDo;
@@ -105,11 +106,13 @@ const handleNewToDo = () => {
 activateBid();
 plusButton.addEventListener('click', handleNewToDo);
 
-const todoManager = () => {
+
+// todoManager main
+(function () {
     fillInDate();
     getTodos();
     fillInToDos();
-}
+})();
 
 
 localStorage.setItem('pendingToDos', JSON.stringify(['enni', 'inni', 'aludni']));
