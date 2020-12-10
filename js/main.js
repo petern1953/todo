@@ -83,20 +83,22 @@ const hideBid = (event) => {
     // console.log(event.target.children[3].classList);
 }
 // toDO: complete
-const makeToDoCompleted = () => {
-
+const makeToDoCompleted = (toDoRow) => {
+    console.log(toDoRow, toDoRow.textContent.trim());
 };
-
-
 
 // toDO: complete
 const activateCheckBox = (checkBox) => {
     checkBox.onclick = function () {
-        console.log(this.parentElement);
-        // if (this.checked) {
-        //     console.log(this);
-        // makeToDoCompleted();
-        // }
+        // these 3 rows are needed to know which row to remove
+        const toDoRow = this.parentElement;
+        // console.log(toDoRow);
+        // console.log(toDoRow.textContent.trim());
+        // ---------------------------
+        if (this.checked) {
+            // console.log(toDoRow, toDoRow.textContent.trim());
+            makeToDoCompleted(toDoRow);
+        }
     };
 };
 // toDO: complete
