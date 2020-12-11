@@ -51,12 +51,14 @@ const updateToDosArray = (toDo, status, action) => {
         if (action === 'insert') pendingToDosArray.unshift(toDo);
         else {
             // meg kell keresni a tömbben, és törölni belőle
+            console.log('todo: ', toDo, 'status: ', status, 'action: ', action);
         }
     } else {
         // completed
         if (action === 'insert') completedToDosArray.unshift(toDo);
         else {
             // meg kell keresni a tömbben, és törölni belőle
+            console.log('todo: ', toDo, 'status: ', status, 'action: ', action);
         }
     }
 };
@@ -90,6 +92,11 @@ const makeToDoCompleted = (toDoRow) => {
     moveToCompleted(toDoRow.outerHTML);
     toDoRow.remove();
     // take out from pendingarray
+    // updatePendingArray(toDoRow);
+    const toDo = toDoRow.textContent.trim();
+    updateToDosArray(toDo, 'pending', 'delete');
+    updateToDosArray(toDo, 'completed', 'insert');
+
     // put into completedList as first rows
     // put into completedArray as first cell
     // write all into localStorage
