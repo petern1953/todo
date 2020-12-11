@@ -64,7 +64,8 @@ section {
 }
 
 .commands, .no-todos {
-    width: 60%;
+    /* width: 60%; */
+    width: 62%;
     /* position: relative; */
     margin: 0 auto;
 }
