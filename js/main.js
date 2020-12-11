@@ -302,8 +302,11 @@ const hideOrShowComplete = () => {
     (hideOrShowText.textContent === 'Hide ') ? hideComplete() : showComplete();
 };
 
+let toDelete;
 const emptyCompletedToDosList = () => {
     console.log('*  emptyCompletedToDosList *');
+    toDelete = completedToDosList.querySelectorAll('li.todo:not(.endOfChain)')
+    toDelete.forEach(li => li.remove());
 }
 
 const clearAll = () => {
