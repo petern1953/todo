@@ -31,6 +31,9 @@ const plusButton = document.querySelector('.instruction-div button');
 const hideOrShowButton = document.querySelector('.hideOrShow__button');
 const hideOrShowText = document.querySelector('.hideOrShow__text');
 const clearAllButton = document.querySelector('.clearAll__button');
+const tasks = document.querySelector('.tasks');
+const commands = document.querySelector('.commands');
+const noTodos = document.querySelector('.no-todos');
 
 let pendingToDosArray = [];
 let completedToDosArray = [];
@@ -253,6 +256,14 @@ const showNewToDo = newToDo => {
     pendingToDosList.innerHTML = toDoHTML + pendingToDosList.innerHTML;
 }
 
+const handleIfPendingToDoListEmpty = () => {
+    if (pendingToDosArray.length === 0) {
+        tasks.classList.add('hidden');
+        commands.classList.add('hidden');
+        noTodos.classList.remove('hidden');
+    }
+};
+
 const removePendingToDo = (ev) => {
     const li = ev.target.parentElement;
     const pendingToDo = li.textContent.trim();
@@ -260,6 +271,7 @@ const removePendingToDo = (ev) => {
     updateToDosArray(pendingToDo, 'pending', 'delete');
     localStorage.setItem(pendingToDoListName, JSON.stringify(pendingToDosArray));
     fillInToDoInfo();
+    handleIfPendingToDoListEmpty();
 }
 
 const handleNewToDo = () => {
