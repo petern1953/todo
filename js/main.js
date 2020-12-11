@@ -52,12 +52,17 @@ const updateToDosArray = (toDo, status, action) => {
         else {
             // meg kell keresni a tömbben, és törölni belőle
             console.log('todo: ', toDo, 'status: ', status, 'action: ', action);
+            console.log('előtte: ', pendingToDosArray);
+            const newArray = pendingToDosArray.filter(item => item !== toDo);
+            pendingToDosArray = newArray;
+            console.log('utána: ', pendingToDosArray);
         }
     } else {
         // completed
         if (action === 'insert') completedToDosArray.unshift(toDo);
         else {
             // meg kell keresni a tömbben, és törölni belőle
+            // majd, amikor a teljes törlésre kerül sor
             console.log('todo: ', toDo, 'status: ', status, 'action: ', action);
         }
     }
