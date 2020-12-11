@@ -107,6 +107,11 @@ section {
 button {
     border: none;
     outline: none;
+    cursor: pointer;
+}
+
+button:hover {
+    color: var(--red);
 }
 
 #instruction {

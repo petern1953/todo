@@ -286,11 +286,16 @@ const showComplete = () => {
 };
 
 const hideOrShowComplete = () => {
-    console.log('*' + hideOrShowText.textContent + '*');
     (hideOrShowText.textContent === 'Hide ') ? hideComplete() : showComplete();
 };
 
+const clearAll = () => {
+    console.log('* clear all *');
+
+}
+
 hideOrShowButton.addEventListener('click', hideOrShowComplete);
+clearAllButton.addEventListener('click', clearAll);
 
 // just for test
 // localStorage.setItem(pendingToDoListName, JSON.stringify(['enni', 'inni', 'aludni']));
