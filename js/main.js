@@ -165,8 +165,11 @@ const activateCheckBoxes = () => {
 const activateBid = (toDoItem) => {
     toDoItem.addEventListener('mouseenter', showBid);
     toDoItem.addEventListener('mouseleave', hideBid);
+    // const bid = toDoItem.querySelector('.fa-trash');
+    // console.log('activate bid: ', toDoItem);
     const bid = toDoItem.querySelector('.fa-trash');
-    console.log('activate bid: ', toDoItem);
+    // bid.addEventListener('click', removePendingToDo);
+    console.log(bid);
 }
 
 const activateBids = () => {
@@ -266,8 +269,8 @@ const handleNewToDo = () => {
     // get trash of first li
     // pendingToDosList
     activateBids();
-    const bid = pendingToDosList.firstElementChild.querySelector('.fa-trash');
-    bid.addEventListener('click', removePendingToDo);
+    // const bid = pendingToDosList.firstElementChild.querySelector('.fa-trash');
+    // bid.addEventListener('click', removePendingToDo);
     activateCheckBoxes();
 }
 
