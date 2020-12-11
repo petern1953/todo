@@ -84,9 +84,10 @@ const hideBid = (event) => {
 }
 // toDO: complete
 const makeToDoCompleted = (toDoRow) => {
-    console.log(toDoRow, toDoRow.textContent.trim());
+    // console.log(toDoRow, toDoRow.textContent.trim());
     // take out toDoRow from pendingList
-    fillInToDo(toDoRow, 'moveToCompleted');
+    console.log('toInsert: ', toDoRow.outerHTML, 'content: ', toDoRow.textContent);
+    moveToCompleted(toDoRow.outerHTML);
     toDoRow.remove();
     // take out from pendingarray
     // put into completedList as first rows
@@ -158,14 +159,15 @@ const makeListItem = (toDo) => {
 // itt tartottam
 const fillInToDo = (toDo, status) => {
     const toDoHTML = makeListItem(toDo);
+    // console.log('todoHTML: ', toDoHTML);
     if (status === 'pending') {
         pendingToDosList.insertBefore(toDoHTML, pendingToDosList.firstElementChild);
         // pendingToDosList.innerHTML = toDoHTML + pendingToDosList.innerHTML;
     } else if (status === 'completed') {
-        // completedToDosList.innerHTML = toDoHTML + completedToDosList.innerHTML;
         completedToDosList.insertBefore(toDoHTML, completedToDosList.firstElementChild);
     } else {
-        console.log(toDo)
+        console.log('todo: ', toDo)
+        // completedToDosList.innerHTML = toDoHTML + completedToDosList.innerHTML;
         // completedToDosList.insertBefore(toDo, completedToDosList.firstElementChild);
     };
 };
@@ -173,6 +175,10 @@ const fillInToDo = (toDo, status) => {
 const fillInToDos = () => {
     if (pendingToDosArray.length > 0) pendingToDosArray.forEach(todo => fillInToDo(todo, 'pending'));
     if (completedToDosArray.length > 0) completedToDosArray.forEach(todo => fillInToDo(todo, 'completed'));
+};
+
+const moveToCompleted = fromPending => {
+    completedToDosList.innerHTML = fromPending + completedToDosList.innerHTML;
 };
 
 const storeToDos = (toDo, status) => {
