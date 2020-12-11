@@ -168,6 +168,7 @@ const activateBid = (toDoItem) => {
     // const bid = toDoItem.querySelector('.fa-trash');
     // console.log('activate bid: ', toDoItem);
     const bid = toDoItem.querySelector('i.fa-trash');
+    // console.log('bid: ', bid);
     if (bid) {
         bid.addEventListener('click', removePendingToDo);
         console.log('bid: ', bid);
@@ -253,7 +254,12 @@ const showNewToDo = newToDo => {
 }
 
 const removePendingToDo = (ev) => {
-    console.log('clicked bid: ', ev.target);
+    const li = ev.target.parentElement;
+    const pendingToDo = li.textContent.trim();
+    li.remove();
+    updateToDosArray(pendingToDo, 'pending', 'delete');
+    localStorage.setItem(pendingToDoListName, JSON.stringify(pendingToDosArray));
+    fillInToDoInfo();
 }
 
 const handleNewToDo = () => {
