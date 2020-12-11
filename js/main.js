@@ -302,13 +302,18 @@ const hideOrShowComplete = () => {
     (hideOrShowText.textContent === 'Hide ') ? hideComplete() : showComplete();
 };
 
+const emptyCompletedToDosList = () => {
+    console.log('*  emptyCompletedToDosList *');
+}
+
 const clearAll = () => {
     console.log('* clear all *');
-    // delete completedToDosList
+    // toDO: empty completedToDosList
+    emptyCompletedToDosList();
     // empty completedToDosArray
     completedToDosArray = [];
-    // save into localStorage
-
+    // toDO: save into localStorage
+    localStorage.setItem(completedToDoListName, JSON.stringify(completedToDosArray));
     // freshen completed task %
     fillInCompletedPercent();
 }
