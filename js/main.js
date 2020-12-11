@@ -165,6 +165,8 @@ const activateCheckBoxes = () => {
 const activateBid = (toDoItem) => {
     toDoItem.addEventListener('mouseenter', showBid);
     toDoItem.addEventListener('mouseleave', hideBid);
+    const bid = toDoItem.querySelector('.fa-trash');
+    console.log('activate bid: ', toDoItem);
 }
 
 const activateBids = () => {
@@ -240,9 +242,13 @@ const showNewToDo = newToDo => {
     const toDoHTML =
         `<li class="todo">
         <input class="checkbox" type="checkbox">
-        <i class="fa fa-check"></i><p>${newToDo}</p><i class="fa fa-trash"></i>
+        <i class="fa fa-check"></i><p>${newToDo}</p><i class="fa fa-trash hidden"></i>
     </li>`;
     pendingToDosList.innerHTML = toDoHTML + pendingToDosList.innerHTML;
+}
+
+const removePendingToDo = (ev) => {
+    console.log('clicked bid: ', ev.target);
 }
 
 const handleNewToDo = () => {
@@ -255,9 +261,17 @@ const handleNewToDo = () => {
     storeToDos(newToDo, 'pending');
     fillInToDoInfo();
     clearToDoInputField();
+    // **************
+    // toDO: make this function work
+    // get trash of first li
+    // pendingToDosList
     activateBids();
+    const bid = pendingToDosList.firstElementChild.querySelector('.fa-trash');
+    bid.addEventListener('click', removePendingToDo);
     activateCheckBoxes();
 }
+
+
 activateBids();
 plusButton.addEventListener('click', handleNewToDo);
 
