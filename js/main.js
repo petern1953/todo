@@ -18,6 +18,7 @@
 const pendingToDoListName = 'pendingToDos';
 const completedToDoListName = 'completedToDos';
 const pendingItemsNumber = document.querySelector('.pending_items .number');
+const completedPercent = document.querySelector('.completed_percent');
 
 // pendingToDos Root
 // const pendingToDos = document.querySelector('.pending.todos');
@@ -43,6 +44,10 @@ const fillInDate = () => {
 
 const fillInToDoInfo = () => {
     pendingItemsNumber.textContent = pendingToDosArray.length;
+    // toDO: ez nincs befejezve nem lehet 0 osztó
+    completedPercent.textContent = (completedToDosArray.length) ?
+        (completedToDosArray.length + pendingToDosArray.length) / completedToDosArray.length :
+        0;
 };
 
 // status: pending / completed, action: insert / delete
@@ -51,16 +56,18 @@ const updateToDosArray = (toDo, status, action) => {
         if (action === 'insert') pendingToDosArray.unshift(toDo);
         else {
             // meg kell keresni a tömbben, és törölni belőle
-            console.log('todo: ', toDo, 'status: ', status, 'action: ', action);
-            console.log('előtte: ', pendingToDosArray);
+            // console.log('todo: ', toDo, 'status: ', status, 'action: ', action);
+            // console.log('előtte: ', pendingToDosArray);
             const newArray = pendingToDosArray.filter(item => item !== toDo);
             pendingToDosArray = newArray;
-            console.log('utána: ', pendingToDosArray);
+            // console.log('utána: ', pendingToDosArray);
         }
     } else {
         // completed
         if (action === 'insert') completedToDosArray.unshift(toDo);
+        // erre az ágra nem lesz szükség itt tartottam
         else {
+
             // meg kell keresni a tömbben, és törölni belőle
             // majd, amikor a teljes törlésre kerül sor
             console.log('todo: ', toDo, 'status: ', status, 'action: ', action);
@@ -94,18 +101,26 @@ const makeToDoCompleted = (toDoRow) => {
     // console.log(toDoRow, toDoRow.textContent.trim());
     // take out toDoRow from pendingList
     console.log('toInsert: ', toDoRow.outerHTML, 'content: ', toDoRow.textContent);
+    // put into completedList as first row ok
     moveToCompleted(toDoRow.outerHTML);
+    // take out from pendingarray ok
     toDoRow.remove();
-    // take out from pendingarray
-    // updatePendingArray(toDoRow);
     const toDo = toDoRow.textContent.trim();
+    // updatePendingArray(toDoRow); ok
     updateToDosArray(toDo, 'pending', 'delete');
+    // put into completedArray as first cell ok
     updateToDosArray(toDo, 'completed', 'insert');
 
-    // put into completedList as first rows
-    // put into completedArray as first cell
-    // write all into localStorage
+    // write all into localStorage ok
+    // storeToDos(toDo, 'pending');
+    localStorage.setItem(pendingToDoListName, JSON.stringify(pendingToDosArray));
+
+    // storeToDos(toDo, 'completed');
+    localStorage.setItem(completedToDoListName, JSON.stringify(completedToDosArray));
+
     // update pending&completed info
+    fillInToDoInfo();
+
     // this one does not exist, toDO: create function completedInfo
 };
 
@@ -118,7 +133,7 @@ const activateCheckBox = (checkBox) => {
         // console.log(toDoRow.textContent.trim());
         // ---------------------------
         if (this.checked) {
-            // console.log(toDoRow, toDoRow.textContent.trim());
+            console.log('checked: ', toDoRow, toDoRow.textContent.trim());
             makeToDoCompleted(toDoRow);
         }
     };
@@ -168,7 +183,7 @@ const makeListItem = (toDo) => {
     activateBid(toDoElement);
     return toDoElement;
 }
-// itt tartottam
+// toDO: ezt befejezni
 const fillInToDo = (toDo, status) => {
     const toDoHTML = makeListItem(toDo);
     // console.log('todoHTML: ', toDoHTML);
@@ -178,7 +193,7 @@ const fillInToDo = (toDo, status) => {
     } else if (status === 'completed') {
         completedToDosList.insertBefore(toDoHTML, completedToDosList.firstElementChild);
     } else {
-        console.log('todo: ', toDo)
+        console.log('FillInToDo else ág: ', toDo)
         // completedToDosList.innerHTML = toDoHTML + completedToDosList.innerHTML;
         // completedToDosList.insertBefore(toDo, completedToDosList.firstElementChild);
     };
