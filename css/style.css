@@ -94,7 +94,7 @@ section {
     height: 28px;
     width: 28px;
     margin-left: 4px;
-    border: none;
+    /* border: none; */
     border-radius: 3px;
     background-color: var(--middlegrey);
     color: var(--white);
@@ -102,6 +102,11 @@ section {
 
 .instruction-div button:hover {
     background-color: var(--blue);
+}
+
+button {
+    border: none;
+    outline: none;
 }
 
 #instruction {
