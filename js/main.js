@@ -18,7 +18,7 @@
 const pendingToDoListName = 'pendingToDos';
 const completedToDoListName = 'completedToDos';
 const pendingItemsNumber = document.querySelector('.pending_items .number');
-const completedPercent = document.querySelector('.completed_percent');
+const completedPercent = document.querySelector('.completed_percent .number');
 
 // pendingToDos Root
 // const pendingToDos = document.querySelector('.pending.todos');
@@ -45,8 +45,8 @@ const fillInDate = () => {
 const fillInToDoInfo = () => {
     pendingItemsNumber.textContent = pendingToDosArray.length;
     // toDO: ez nincs befejezve nem lehet 0 osztó
-    completedPercent.textContent = (completedToDosArray.length) ?
-        (completedToDosArray.length + pendingToDosArray.length) / completedToDosArray.length :
+    completedPercent.textContent = (completedToDosArray.length + pendingToDosArray.length) ?
+        Math.ceil(completedToDosArray.length / (pendingToDosArray.length + completedToDosArray.length) * 100) :
         0;
 };
 
