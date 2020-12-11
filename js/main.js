@@ -28,6 +28,9 @@ const pendingToDosList = document.querySelector('.pending.todos');
 const completedToDosList = document.querySelector('.completed.todos');
 const instruction = document.querySelector('#instruction');
 const plusButton = document.querySelector('.instruction-div button');
+const hideOrShowButton = document.querySelector('.hideOrShow__button');
+const hideOrShowText = document.querySelector('.hideOrShow__text');
+const clearAllButton = document.querySelector('.clearAll__button');
 
 let pendingToDosArray = [];
 let completedToDosArray = [];
@@ -263,6 +266,20 @@ const handleCompletedToDo = () => {
     activateCheckBoxes();
 
 })();
+
+const hideComplete = () => {
+    hideOrShowText.textContent = 'Show ';
+};
+
+const showComplete = () => {
+    hideOrShowText.textContent = 'Hide ';
+};
+
+const hideOrShowComplete = () => {
+    (hideOrShowText.textContent === 'Hide ') ? hideComplete() : showComplete();
+};
+
+hideOrShowButton.addEventListener('click', hideOrShowComplete);
 
 // just for test
 // localStorage.setItem(pendingToDoListName, JSON.stringify(['enni', 'inni', 'aludni']));
