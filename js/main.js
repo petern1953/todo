@@ -86,6 +86,7 @@ const hideBid = (event) => {
 const makeToDoCompleted = (toDoRow) => {
     console.log(toDoRow, toDoRow.textContent.trim());
     // take out toDoRow from pendingList
+    fillInToDo(toDoRow, 'moveToCompleted');
     toDoRow.remove();
     // take out from pendingarray
     // put into completedList as first rows
@@ -154,15 +155,18 @@ const makeListItem = (toDo) => {
     activateBid(toDoElement);
     return toDoElement;
 }
-
+// itt tartottam
 const fillInToDo = (toDo, status) => {
     const toDoHTML = makeListItem(toDo);
     if (status === 'pending') {
         pendingToDosList.insertBefore(toDoHTML, pendingToDosList.firstElementChild);
         // pendingToDosList.innerHTML = toDoHTML + pendingToDosList.innerHTML;
-    } else {
+    } else if (status === 'completed') {
         // completedToDosList.innerHTML = toDoHTML + completedToDosList.innerHTML;
         completedToDosList.insertBefore(toDoHTML, completedToDosList.firstElementChild);
+    } else {
+        console.log(toDo)
+        // completedToDosList.insertBefore(toDo, completedToDosList.firstElementChild);
     };
 };
 
