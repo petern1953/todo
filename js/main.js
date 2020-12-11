@@ -267,15 +267,26 @@ const handleCompletedToDo = () => {
 
 })();
 
+const hideCompletedToDos = () => {
+    completedToDosList.classList.add('hidden');
+};
+
+const showCompletedToDos = () => {
+    completedToDosList.classList.remove('hidden');
+};
+
 const hideComplete = () => {
     hideOrShowText.textContent = 'Show ';
+    hideCompletedToDos();
 };
 
 const showComplete = () => {
     hideOrShowText.textContent = 'Hide ';
+    showCompletedToDos();
 };
 
 const hideOrShowComplete = () => {
+    console.log('*' + hideOrShowText.textContent + '*');
     (hideOrShowText.textContent === 'Hide ') ? hideComplete() : showComplete();
 };
 

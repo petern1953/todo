@@ -128,9 +128,6 @@ button {
     color: var(--darkgrey);
 }
 
-.hidden {
-    display: none;
-}
 
 .no-todos img {
     width: 100%;
@@ -240,5 +237,9 @@ button {
 }
 
 .endOfChain {
+    display: none;
+}
+
+.hidden {
     display: none;
 }
