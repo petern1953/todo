@@ -45,18 +45,30 @@ const fillInDate = () => {
     date.innerHTML = dateString;
 };
 
-const fillInToDoInfo = () => {
+const fillInPendingNumber = () => {
     pendingItemsNumber.textContent = pendingToDosArray.length;
-    // toDO: ez nincs befejezve nem lehet 0 osztó
+};
+
+const fillInCompletedPercent = () => {
     completedPercent.textContent = (completedToDosArray.length + pendingToDosArray.length) ?
         Math.ceil(completedToDosArray.length / (pendingToDosArray.length + completedToDosArray.length) * 100) :
         0;
 };
 
+const fillInToDoInfo = () => {
+    // pendingItemsNumber.textContent = pendingToDosArray.length;
+    fillInPendingNumber();
+    // completedPercent.textContent = (completedToDosArray.length + pendingToDosArray.length) ?
+    //     Math.ceil(completedToDosArray.length / (pendingToDosArray.length + completedToDosArray.length) * 100) :
+    //     0;
+    fillInCompletedPercent();
+};
+
 // status: pending / completed, action: insert / delete
 const updateToDosArray = (toDo, status, action) => {
     if (status === 'pending') {
-        if (action === 'insert') pendingToDosArray.unshift(toDo);
+        // if (action === 'insert') pendingToDosArray.unshift(toDo);
+        if (action === 'insert') pendingToDosArray.push(toDo);
         else {
             // meg kell keresni a tömbben, és törölni belőle
             // console.log('todo: ', toDo, 'status: ', status, 'action: ', action);
@@ -66,15 +78,16 @@ const updateToDosArray = (toDo, status, action) => {
             // console.log('utána: ', pendingToDosArray);
         }
     } else {
-        // completed
-        if (action === 'insert') completedToDosArray.unshift(toDo);
+        // when completed
+        // if (action === 'insert')
+        // completedToDosArray.unshift(toDo);
+        completedToDosArray.push(toDo);
         // erre az ágra nem lesz szükség itt tartottam
-        else {
-
-            // meg kell keresni a tömbben, és törölni belőle
-            // majd, amikor a teljes törlésre kerül sor
-            console.log('todo: ', toDo, 'status: ', status, 'action: ', action);
-        }
+        // else {
+        // meg kell keresni a tömbben, és törölni belőle
+        // majd, amikor a teljes törlésre kerül sor
+        // console.log('todo: ', toDo, 'status: ', status, 'action: ', action);
+        // }
     }
 };
 
@@ -291,7 +304,13 @@ const hideOrShowComplete = () => {
 
 const clearAll = () => {
     console.log('* clear all *');
+    // delete completedToDosList
+    // empty completedToDosArray
+    completedToDosArray = [];
+    // save into localStorage
 
+    // freshen completed task %
+    fillInCompletedPercent();
 }
 
 hideOrShowButton.addEventListener('click', hideOrShowComplete);
