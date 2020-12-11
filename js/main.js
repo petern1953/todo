@@ -161,15 +161,17 @@ const activateCheckBoxes = () => {
     // pendigToDoItems.forEach(item => item.addEventListener('mouseleave', hideBid));
     checkBoxes.forEach(checkBox => activateCheckBox(checkBox));
 }
-
+// toDO: find "clicked bid" and create / finish function
 const activateBid = (toDoItem) => {
     toDoItem.addEventListener('mouseenter', showBid);
     toDoItem.addEventListener('mouseleave', hideBid);
     // const bid = toDoItem.querySelector('.fa-trash');
     // console.log('activate bid: ', toDoItem);
-    const bid = toDoItem.querySelector('.fa-trash');
-    // bid.addEventListener('click', removePendingToDo);
-    console.log(bid);
+    const bid = toDoItem.querySelector('i.fa-trash');
+    if (bid) {
+        bid.addEventListener('click', removePendingToDo);
+        console.log('bid: ', bid);
+    }
 }
 
 const activateBids = () => {
