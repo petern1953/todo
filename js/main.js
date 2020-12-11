@@ -226,6 +226,9 @@ const handleCompletedToDo = () => {
     getTodos();
     fillInToDos();
     fillInToDoInfo();
+    activateBids();
+    activateCheckBoxes();
+
 })();
 
 // just for test
