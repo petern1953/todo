@@ -260,18 +260,39 @@ const showNewToDo = newToDo => {
 // induláskor ? nem kell
 // + gombos beíráskor megnézni, noTodos 'hidden'-e
 // amikor a pendingToDoList módosul
+// const handleIfPendingToDoListEmpty = () => {
+//     if (!noTodos.classList.contains('hidden')) {
+//         tasks.classList.remove('hidden');
+//         commands.classList.remove('hidden');
+//         noTodos.classList.add('hidden');
+//         return;
+//     };
+//     if (pendingToDosArray.length === 0) {
+//         tasks.classList.add('hidden');
+//         commands.classList.add('hidden');
+//         noTodos.classList.remove('hidden');
+//     }
+// };
+
+// const showChill = () => {
+//     tasks.classList.add('hidden');
+//     commands.classList.add('hidden');
+//     noTodos.classList.remove('hidden');
+// };
+
+// const hideChill = () => {
+//     tasks.classList.remove('hidden');
+//     commands.classList.remove('hidden');
+//     noTodos.classList.add('hidden');
+// };
+
+const isChillVisible = () => {
+    return !noTodos.classList.contains('hidden');
+};
+
 const handleIfPendingToDoListEmpty = () => {
-    if (!noTodos.classList.contains('hidden')) {
-        tasks.classList.remove('hidden');
-        commands.classList.remove('hidden');
-        noTodos.classList.add('hidden');
-        return;
-    };
-    if (pendingToDosArray.length === 0) {
-        tasks.classList.add('hidden');
-        commands.classList.add('hidden');
-        noTodos.classList.remove('hidden');
-    }
+    if (pendingToDosArray.length) return;
+    isChillVisible ? hideChill() : showChill();
 };
 
 const removePendingToDo = (ev) => {
@@ -290,9 +311,9 @@ const handleNewToDo = () => {
         clearToDoInputField();
         return;
     }
+    storeToDos(newToDo, 'pending');
     handleIfPendingToDoListEmpty();
     showNewToDo(newToDo);
-    storeToDos(newToDo, 'pending');
     fillInToDoInfo();
     clearToDoInputField();
     // **************
@@ -358,6 +379,8 @@ const emptyCompletedToDosList = () => {
 }
 
 const clearAll = () => {
+    // toDO: javítani
+    // tévedés van, nem a completed, hanem a pending teendőket kell törölni
     console.log('* clear all *');
     // toDO: empty completedToDosList
     emptyCompletedToDosList();
