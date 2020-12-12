@@ -256,7 +256,17 @@ const showNewToDo = newToDo => {
     pendingToDosList.innerHTML = toDoHTML + pendingToDosList.innerHTML;
 }
 
+// toDO: kezelni pending to completed esetén
+// induláskor ? nem kell
+// + gombos beíráskor megnézni, noTodos 'hidden'-e
+// amikor a pendingToDoList módosul
 const handleIfPendingToDoListEmpty = () => {
+    if (!noTodos.classList.contains('hidden')) {
+        tasks.classList.remove('hidden');
+        commands.classList.remove('hidden');
+        noTodos.classList.add('hidden');
+        return;
+    };
     if (pendingToDosArray.length === 0) {
         tasks.classList.add('hidden');
         commands.classList.add('hidden');
@@ -280,6 +290,7 @@ const handleNewToDo = () => {
         clearToDoInputField();
         return;
     }
+    handleIfPendingToDoListEmpty();
     showNewToDo(newToDo);
     storeToDos(newToDo, 'pending');
     fillInToDoInfo();
