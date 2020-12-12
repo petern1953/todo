@@ -71,6 +71,27 @@ section {
     margin: 0 auto;
 }
 
+.no-todos {
+    animation: slowAppearance 3s ;
+}
+
+@keyframes slowAppearance {
+    from {visibility: hidden;
+        opacity: 0%;}
+    to {visibility: visible;
+        opacity: 100%;}
+}
+/* **********
+    animation: trashAppear .3s;
+}
+
+@keyframes trashAppear {
+  from {left: 30px;}
+  to {left: 0px;}
+}
+
+*********** */
+
 .commands button {
     font-family: var(--font);
     font-size: .95rem;
