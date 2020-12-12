@@ -156,10 +156,20 @@ button:hover {
 
 .pending .todo {
     /* list-style: none; */
+    /* new one */
+    position: relative; 
+    /* ********* */
     background-color: var(--grey);
     margin-bottom: 8px;
     border-radius: 3px;
+    animation: todoAppear 3s;
 }
+
+@keyframes todoAppear {
+  from {left: 200px;}
+  to {left: 0px;}
+}
+
 
 .completed .todo {
     /* list-style: none; */
@@ -226,16 +236,28 @@ button:hover {
     position: relative;
     top: -2px;
     margin: 0;
-    padding: 9px 11px 9px;
+    padding: 9px 13px 9px;
     background-color: var(--red);
     font-size: .7rem;
     border-radius: 0 3px 3px 0;
     color: var(--white);
     cursor: pointer;
+    /* right: 0px;
+    transition: right 3s; */
+    animation: trashAppear .3s;
 }
+
+@keyframes trashAppear {
+  from {left: 30px;}
+  to {left: 0px;}
+}
+
 
 .pending .todo .fa-trash.hidden::before {
     display: none;
+    /* right: 50px;
+        transition: right 3s; */
+
 }
 
 .completed .todo .fa-trash::before {
