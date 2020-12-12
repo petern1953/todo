@@ -156,17 +156,20 @@ button:hover {
 
 .pending .todo {
     /* list-style: none; */
-    /* new one */
-    position: relative; 
-    /* ********* */
     background-color: var(--grey);
     margin-bottom: 8px;
     border-radius: 3px;
-    animation: todoAppear 3s;
 }
 
+/* new one */
+.pending.todos li:first-child {
+    position: relative; 
+    animation: todoAppear .6s;
+}
+/* ********* */
+
 @keyframes todoAppear {
-  from {left: 200px;}
+  from {left: 100px;}
   to {left: 0px;}
 }
 
