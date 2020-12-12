@@ -1,4 +1,3 @@
-/* toDO: animations */
 :root {
     --darkgrey: #555;
     --middlegrey: #bbb;
@@ -65,9 +64,7 @@ section {
 }
 
 .commands, .no-todos {
-    /* width: 60%; */
     width: 62%;
-    /* position: relative; */
     margin: 0 auto;
 }
 
@@ -81,16 +78,6 @@ section {
     to {visibility: visible;
         opacity: 100%;}
 }
-/* **********
-    animation: trashAppear .3s;
-}
-
-@keyframes trashAppear {
-  from {left: 30px;}
-  to {left: 0px;}
-}
-
-*********** */
 
 .commands button {
     font-family: var(--font);
@@ -116,7 +103,6 @@ section {
     height: 28px;
     width: 28px;
     margin-left: 4px;
-    /* border: none; */
     border-radius: 3px;
     background-color: var(--middlegrey);
     color: var(--white);
@@ -141,20 +127,10 @@ button:hover {
     border-radius: 3px;
 }
 
-/* .todo, .completed {
-    display: block;
-    width: 80%;
-    height: 18px;
-    padding: 4px 80% 4px 10%;
-    background-color: var(--darkgrey);
-    border-radius: 3px;
-} */
-
 .no-todos {
     font-size: .9rem;
     color: var(--darkgrey);
 }
-
 
 .no-todos img {
     width: 100%;
@@ -171,23 +147,19 @@ button:hover {
     width: 100%;
     height: 30px;
     padding: 0px;
-    /* display: inline-block; */
     display: block;
 }
 
 .pending .todo {
-    /* list-style: none; */
     background-color: var(--grey);
     margin-bottom: 8px;
     border-radius: 3px;
 }
 
-/* new one */
 .pending.todos li:first-child {
     position: relative; 
     animation: todoAppear .8s ease-in-out;
 }
-/* ********* */
 
 @keyframes todoAppear {
     from {left: 120px;
@@ -198,9 +170,7 @@ button:hover {
     }
 }
 
-
 .completed .todo {
-    /* list-style: none; */
     background-color: var(--white);
     margin-bottom: 8px;
     border-radius: 3px;
@@ -260,7 +230,6 @@ button:hover {
 }
 
 .pending .todo .fa-trash::before {
-    /* display: inline-block; */
     position: relative;
     top: -2px;
     margin: 0;
@@ -270,8 +239,6 @@ button:hover {
     border-radius: 0 3px 3px 0;
     color: var(--white);
     cursor: pointer;
-    /* right: 0px;
-    transition: right 3s; */
     animation: trashAppear .3s;
 }
 
@@ -280,12 +247,8 @@ button:hover {
   to {left: 0px;}
 }
 
-
 .pending .todo .fa-trash.hidden::before {
     display: none;
-    /* right: 50px;
-        transition: right 3s; */
-
 }
 
 .completed .todo .fa-trash::before {
