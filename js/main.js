@@ -20,17 +20,15 @@ const completedToDoListName = 'completedToDos';
 const pendingItemsNumber = document.querySelector('.pending_items .number');
 const completedPercent = document.querySelector('.completed_percent .number');
 
-// pendingToDos Root
-// const pendingToDos = document.querySelector('.pending.todos');
 const pendingToDosList = document.querySelector('.pending.todos');
-// completedToDos Root
-// const completedToDos = document.querySelector('.completed.todos');
 const completedToDosList = document.querySelector('.completed.todos');
+
 const instruction = document.querySelector('#instruction');
 const plusButton = document.querySelector('.instruction-div button');
 const hideOrShowButton = document.querySelector('.hideOrShow__button');
 const hideOrShowText = document.querySelector('.hideOrShow__text');
 const clearAllButton = document.querySelector('.clearAll__button');
+
 const tasks = document.querySelector('.tasks');
 const commands = document.querySelector('.commands');
 const noTodos = document.querySelector('.no-todos');
@@ -60,45 +58,26 @@ const fillInCompletedPercent = () => {
 };
 
 const fillInToDoInfo = () => {
-    // pendingItemsNumber.textContent = pendingToDosArray.length;
     fillInPendingNumber();
-    // completedPercent.textContent = (completedToDosArray.length + pendingToDosArray.length) ?
-    //     Math.ceil(completedToDosArray.length / (pendingToDosArray.length + completedToDosArray.length) * 100) :
-    //     0;
     fillInCompletedPercent();
 };
 
 // status: pending / completed, action: insert / delete
 const updateToDosArray = (toDo, status, action) => {
     if (status === 'pending') {
-        // if (action === 'insert') pendingToDosArray.unshift(toDo);
         if (action === 'insert') pendingToDosArray.push(toDo);
         else {
-            // meg kell keresni a tömbben, és törölni belőle
-            // console.log('todo: ', toDo, 'status: ', status, 'action: ', action);
-            // console.log('előtte: ', pendingToDosArray);
             const newArray = pendingToDosArray.filter(item => item !== toDo);
             pendingToDosArray = newArray;
-            // console.log('utána: ', pendingToDosArray);
         }
     } else {
-        // when completed
-        // if (action === 'insert')
-        // completedToDosArray.unshift(toDo);
         completedToDosArray.push(toDo);
-        // erre az ágra nem lesz szükség itt tartottam
-        // else {
-        // meg kell keresni a tömbben, és törölni belőle
-        // majd, amikor a teljes törlésre kerül sor
-        // console.log('todo: ', toDo, 'status: ', status, 'action: ', action);
-        // }
     }
 };
 
 let newToDo;
 const getNewToDo = () => {
     const newToDo = instruction.value;
-    // updateToDosArray(newToDo, 'pending', 'insert');
     return newToDo;
 };
 
@@ -109,70 +88,45 @@ const clearToDoInputField = () => {
 
 const showBid = (event) => {
     event.target.children[3].classList.remove('hidden');
-    // console.log(event.target.children[3].classList);
 }
 
 const hideBid = (event) => {
     event.target.children[3].classList.add('hidden');
-    // console.log(event.target.children[3].classList);
 }
-// toDO: complete
+
 const makeToDoCompleted = (toDoRow) => {
-    // console.log(toDoRow, toDoRow.textContent.trim());
-    // take out toDoRow from pendingList
-    console.log('toInsert: ', toDoRow.outerHTML, 'content: ', toDoRow.textContent);
-    // put into completedList as first row ok
     moveToCompleted(toDoRow.outerHTML);
-    // take out from pendingarray ok
     toDoRow.remove();
+
     const toDo = toDoRow.textContent.trim();
-    // updatePendingArray(toDoRow); ok
     updateToDosArray(toDo, 'pending', 'delete');
-    // put into completedArray as first cell ok
     updateToDosArray(toDo, 'completed', 'insert');
     handleIfPendingToDoListEmpty();
-    // write all into localStorage ok
-    // storeToDos(toDo, 'pending');
-    localStorage.setItem(pendingToDoListName, JSON.stringify(pendingToDosArray));
 
-    // storeToDos(toDo, 'completed');
+    localStorage.setItem(pendingToDoListName, JSON.stringify(pendingToDosArray));
     localStorage.setItem(completedToDoListName, JSON.stringify(completedToDosArray));
 
-    // update pending&completed info
     fillInToDoInfo();
-
-    // this one does not exist, toDO: create function completedInfo
 };
 
-// toDO: complete
 const activateCheckBox = (checkBox) => {
     checkBox.onclick = function () {
-        // these 3 rows are needed to know which row to remove
         const toDoRow = this.parentElement;
-        // console.log(toDoRow);
-        // console.log(toDoRow.textContent.trim());
-        // ---------------------------
         if (this.checked) {
             console.log('checked: ', toDoRow, toDoRow.textContent.trim());
             makeToDoCompleted(toDoRow);
         }
     };
 };
-// toDO: complete
+
 const activateCheckBoxes = () => {
     const checkBoxes = document.querySelectorAll('.pending .todo .checkbox');
-    // pendigToDoItems.forEach(item => item.addEventListener('mouseenter', showBid));
-    // pendigToDoItems.forEach(item => item.addEventListener('mouseleave', hideBid));
     checkBoxes.forEach(checkBox => activateCheckBox(checkBox));
 }
-// toDO: find "clicked bid" and create / finish function
 const activateBid = (toDoItem) => {
     toDoItem.addEventListener('mouseenter', showBid);
     toDoItem.addEventListener('mouseleave', hideBid);
-    // const bid = toDoItem.querySelector('.fa-trash');
-    // console.log('activate bid: ', toDoItem);
     const bid = toDoItem.querySelector('i.fa-trash');
-    // console.log('bid: ', bid);
     if (bid) {
         bid.addEventListener('click', removePendingToDo);
         console.log('bid: ', bid);
@@ -181,8 +135,6 @@ const activateBid = (toDoItem) => {
 
 const activateBids = () => {
     const pendigToDoItems = document.querySelectorAll('.pending .todo');
-    // pendigToDoItems.forEach(item => item.addEventListener('mouseenter', showBid));
-    // pendigToDoItems.forEach(item => item.addEventListener('mouseleave', hideBid));
     pendigToDoItems.forEach(item => activateBid(item));
 }
 
@@ -191,8 +143,8 @@ const getTodos = () => {
     pendingToDosArray = pending ? JSON.parse(pending) : [];
     const completed = localStorage.getItem(completedToDoListName);
     completedToDosArray = completed ? JSON.parse(completed) : [];
-    // JSON.parse(localStorage.getItem(completedToDoListName));
 }
+
 const createToDoElement = () => {
     const toDoElement = document.createElement('li');
     toDoElement.classList.add('todo');
@@ -200,10 +152,6 @@ const createToDoElement = () => {
 }
 
 const makeListItem = (toDo) => {
-    // return `<li class="todo">
-    //     <input class="checkbox" type="checkbox">
-    //     <i class="fa fa-check"></i><p>${toDo}</p><i class="fa fa-trash hidden"></i>
-    // </li>`;
     const toDoElement = createToDoElement();
     toDoElement.innerHTML =
         `<input class="checkbox" type="checkbox">
@@ -211,19 +159,15 @@ const makeListItem = (toDo) => {
     activateBid(toDoElement);
     return toDoElement;
 }
-// toDO: ezt befejezni
+
 const fillInToDo = (toDo, status) => {
     const toDoHTML = makeListItem(toDo);
-    // console.log('todoHTML: ', toDoHTML);
     if (status === 'pending') {
         pendingToDosList.insertBefore(toDoHTML, pendingToDosList.firstElementChild);
-        // pendingToDosList.innerHTML = toDoHTML + pendingToDosList.innerHTML;
     } else if (status === 'completed') {
         completedToDosList.insertBefore(toDoHTML, completedToDosList.firstElementChild);
     } else {
         console.log('FillInToDo else ág: ', toDo)
-        // completedToDosList.innerHTML = toDoHTML + completedToDosList.innerHTML;
-        // completedToDosList.insertBefore(toDo, completedToDosList.firstElementChild);
     };
 };
 
@@ -243,11 +187,8 @@ const storeToDos = (toDo, status) => {
     }
     if (status === 'completed' || status === '')
         localStorage.setItem(completedToDoListName, JSON.stringify(completedToDosArray));
-    // localStorage.setItem(JSON.stringify(completedToDoListName, completedToDosArray));
 }
 
-// toDO: check these if needed at all
-//
 const showNewToDo = newToDo => {
     const toDoHTML =
         `<li class="todo">
@@ -256,24 +197,6 @@ const showNewToDo = newToDo => {
     </li>`;
     pendingToDosList.innerHTML = toDoHTML + pendingToDosList.innerHTML;
 }
-
-// toDO: kezelni pending to completed esetén
-// induláskor ? nem kell
-// + gombos beíráskor megnézni, noTodos 'hidden'-e
-// amikor a pendingToDoList módosul
-// const handleIfPendingToDoListEmpty = () => {
-//     if (!noTodos.classList.contains('hidden')) {
-//         tasks.classList.remove('hidden');
-//         commands.classList.remove('hidden');
-//         noTodos.classList.add('hidden');
-//         return;
-//     };
-//     if (pendingToDosArray.length === 0) {
-//         tasks.classList.add('hidden');
-//         commands.classList.add('hidden');
-//         noTodos.classList.remove('hidden');
-//     }
-// };
 
 const showChill = () => {
     console.log('show chill');
@@ -332,13 +255,7 @@ const handleNewToDo = () => {
     showNewToDo(newToDo);
     fillInToDoInfo();
     clearToDoInputField();
-    // **************
-    // toDO: make this function work
-    // get trash of first li
-    // pendingToDosList
     activateBids();
-    // const bid = pendingToDosList.firstElementChild.querySelector('.fa-trash');
-    // bid.addEventListener('click', removePendingToDo);
     activateCheckBoxes();
 }
 
@@ -346,13 +263,7 @@ const handleNewToDo = () => {
 activateBids();
 plusButton.addEventListener('click', handleNewToDo);
 
-const handleCompletedToDo = () => {
-
-};
-// const activateCheckBox = () => {
-//     const checkBox =
-//         checkBox.addEventListener
-// }
+// const handleCompletedToDo = () => {};
 
 // todoManager main
 (function () {
@@ -362,7 +273,6 @@ const handleCompletedToDo = () => {
     fillInToDoInfo();
     activateBids();
     activateCheckBoxes();
-
 })();
 
 const hideCompletedToDos = () => {
@@ -388,11 +298,6 @@ const hideOrShowComplete = () => {
 };
 
 let toDelete;
-// const emptyCompletedToDosList = () => {
-//     console.log('*  emptyCompletedToDosList *');
-//     toDelete = completedToDosList.querySelectorAll('li.todo:not(.endOfChain)')
-//     toDelete.forEach(li => li.remove());
-// }
 const emptyPendingToDosList = () => {
     console.log('*  emptyPendingToDosList *');
     toDelete = pendingToDosList.querySelectorAll('li.todo:not(.endOfChain)')
@@ -400,20 +305,10 @@ const emptyPendingToDosList = () => {
 }
 
 const clearAll = () => {
-    // toDO: javítani
-    // tévedés van, nem a completed, hanem a pending teendőket kell törölni
     console.log('* clear all *');
-    // toDO: empty completedToDosList
     emptyPendingToDosList();
-    // emptyCompletedToDosList();
-    // empty completedToDosArray
-    // completedToDosArray = [];
     pendingToDosArray = [];
-    // toDO: save into localStorage
-    // localStorage.setItem(completedToDoListName, JSON.stringify(completedToDosArray));
     localStorage.setItem(pendingToDoListName, JSON.stringify(pendingToDosArray));
-    // freshen completed task %
-    // fillInCompletedPercent();
     fillInToDoInfo();
     handleIfPendingToDoListEmpty();
 }
