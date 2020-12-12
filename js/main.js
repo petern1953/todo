@@ -372,9 +372,14 @@ const hideOrShowComplete = () => {
 };
 
 let toDelete;
-const emptyCompletedToDosList = () => {
-    console.log('*  emptyCompletedToDosList *');
-    toDelete = completedToDosList.querySelectorAll('li.todo:not(.endOfChain)')
+// const emptyCompletedToDosList = () => {
+//     console.log('*  emptyCompletedToDosList *');
+//     toDelete = completedToDosList.querySelectorAll('li.todo:not(.endOfChain)')
+//     toDelete.forEach(li => li.remove());
+// }
+const emptyPendingToDosList = () => {
+    console.log('*  emptyPendingToDosList *');
+    toDelete = pendingToDosList.querySelectorAll('li.todo:not(.endOfChain)')
     toDelete.forEach(li => li.remove());
 }
 
@@ -383,13 +388,17 @@ const clearAll = () => {
     // tévedés van, nem a completed, hanem a pending teendőket kell törölni
     console.log('* clear all *');
     // toDO: empty completedToDosList
-    emptyCompletedToDosList();
+    emptyPendingToDosList();
+    // emptyCompletedToDosList();
     // empty completedToDosArray
-    completedToDosArray = [];
+    // completedToDosArray = [];
+    pendingToDosArray = [];
     // toDO: save into localStorage
-    localStorage.setItem(completedToDoListName, JSON.stringify(completedToDosArray));
+    // localStorage.setItem(completedToDoListName, JSON.stringify(completedToDosArray));
+    localStorage.setItem(pendingToDoListName, JSON.stringify(pendingToDosArray));
     // freshen completed task %
-    fillInCompletedPercent();
+    // fillInCompletedPercent();
+    fillInToDoInfo();
 }
 
 hideOrShowButton.addEventListener('click', hideOrShowComplete);
