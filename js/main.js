@@ -113,7 +113,6 @@ const activateCheckBox = (checkBox) => {
     checkBox.onclick = function () {
         const toDoRow = this.parentElement;
         if (this.checked) {
-            console.log('checked: ', toDoRow, toDoRow.textContent.trim());
             makeToDoCompleted(toDoRow);
         }
     };
@@ -129,7 +128,6 @@ const activateBid = (toDoItem) => {
     const bid = toDoItem.querySelector('i.fa-trash');
     if (bid) {
         bid.addEventListener('click', removePendingToDo);
-        console.log('bid: ', bid);
     }
 }
 
@@ -164,10 +162,9 @@ const fillInToDo = (toDo, status) => {
     const toDoHTML = makeListItem(toDo);
     if (status === 'pending') {
         pendingToDosList.insertBefore(toDoHTML, pendingToDosList.firstElementChild);
-    } else if (status === 'completed') {
-        completedToDosList.insertBefore(toDoHTML, completedToDosList.firstElementChild);
+        // } else if (status === 'completed') {
     } else {
-        console.log('FillInToDo else ág: ', toDo)
+        completedToDosList.insertBefore(toDoHTML, completedToDosList.firstElementChild);
     };
 };
 
@@ -199,22 +196,18 @@ const showNewToDo = newToDo => {
 }
 
 const showChill = () => {
-    console.log('show chill');
-
     tasks.classList.add('hidden');
     commands.classList.add('hidden');
     noTodos.classList.remove('hidden');
 };
 
 const hideChill = () => {
-    console.log('hide chill');
     tasks.classList.remove('hidden');
     commands.classList.remove('hidden');
     noTodos.classList.add('hidden');
 };
 
 const isChillVisible = () => {
-    console.log('hidden? ', !noTodos.classList.contains('hidden'));
     return !noTodos.classList.contains('hidden');
 };
 
@@ -224,12 +217,10 @@ const isPendingToDoListEmpty = () => {
 
 const handleIfPendingToDoListEmpty = () => {
     if (!isPendingToDoListEmpty() && isChillVisible()) {
-        console.log('pendingToDosArray not empty');
         hideChill();
         return
     };
     if (isPendingToDoListEmpty() && !isChillVisible()) {
-        console.log('pendingToDosArray is empty');
         showChill();
     }
 };
@@ -299,13 +290,11 @@ const hideOrShowComplete = () => {
 
 let toDelete;
 const emptyPendingToDosList = () => {
-    console.log('*  emptyPendingToDosList *');
     toDelete = pendingToDosList.querySelectorAll('li.todo:not(.endOfChain)')
     toDelete.forEach(li => li.remove());
 }
 
 const clearAll = () => {
-    console.log('* clear all *');
     emptyPendingToDosList();
     pendingToDosArray = [];
     localStorage.setItem(pendingToDoListName, JSON.stringify(pendingToDosArray));
