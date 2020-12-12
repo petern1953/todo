@@ -274,17 +274,17 @@ const showNewToDo = newToDo => {
 //     }
 // };
 
-// const showChill = () => {
-//     tasks.classList.add('hidden');
-//     commands.classList.add('hidden');
-//     noTodos.classList.remove('hidden');
-// };
+const showChill = () => {
+    tasks.classList.add('hidden');
+    commands.classList.add('hidden');
+    noTodos.classList.remove('hidden');
+};
 
-// const hideChill = () => {
-//     tasks.classList.remove('hidden');
-//     commands.classList.remove('hidden');
-//     noTodos.classList.add('hidden');
-// };
+const hideChill = () => {
+    tasks.classList.remove('hidden');
+    commands.classList.remove('hidden');
+    noTodos.classList.add('hidden');
+};
 
 const isChillVisible = () => {
     return !noTodos.classList.contains('hidden');
