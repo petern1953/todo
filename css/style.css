@@ -164,13 +164,17 @@ button:hover {
 /* new one */
 .pending.todos li:first-child {
     position: relative; 
-    animation: todoAppear .6s;
+    animation: todoAppear .8s ease-in-out;
 }
 /* ********* */
 
 @keyframes todoAppear {
-  from {left: 100px;}
-  to {left: 0px;}
+    from {left: 120px;
+        transform: rotateY(90deg);
+    }
+    to {left: 0px;
+        transform: rotateY(0deg);
+    }
 }
 
 
