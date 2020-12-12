@@ -42,7 +42,8 @@ const fillInDate = () => {
     const date = document.querySelector('.date');
     const now = new Date();
     const options = { weekday: 'long', year: 'numeric', month: 'numeric', day: 'numeric' };
-    const dateString = now.toLocaleDateString('en-GB', options)
+    // const dateString = now.toLocaleDateString('en-GB', options)
+    const dateString = now.toLocaleDateString('en-US', options)
         .replace(', ', '<br>')
         .replace(/\//g, '-');
     date.innerHTML = dateString;
@@ -129,7 +130,7 @@ const makeToDoCompleted = (toDoRow) => {
     updateToDosArray(toDo, 'pending', 'delete');
     // put into completedArray as first cell ok
     updateToDosArray(toDo, 'completed', 'insert');
-
+    handleIfPendingToDoListEmpty();
     // write all into localStorage ok
     // storeToDos(toDo, 'pending');
     localStorage.setItem(pendingToDoListName, JSON.stringify(pendingToDosArray));
@@ -275,24 +276,39 @@ const showNewToDo = newToDo => {
 // };
 
 const showChill = () => {
+    console.log('show chill');
+
     tasks.classList.add('hidden');
     commands.classList.add('hidden');
     noTodos.classList.remove('hidden');
 };
 
 const hideChill = () => {
+    console.log('hide chill');
     tasks.classList.remove('hidden');
     commands.classList.remove('hidden');
     noTodos.classList.add('hidden');
 };
 
 const isChillVisible = () => {
+    console.log('hidden? ', !noTodos.classList.contains('hidden'));
     return !noTodos.classList.contains('hidden');
 };
 
+const isPendingToDoListEmpty = () => {
+    return pendingToDosArray.length === 0;
+};
+
 const handleIfPendingToDoListEmpty = () => {
-    if (pendingToDosArray.length) return;
-    isChillVisible ? hideChill() : showChill();
+    if (!isPendingToDoListEmpty() && isChillVisible()) {
+        console.log('pendingToDosArray not empty');
+        hideChill();
+        return
+    };
+    if (isPendingToDoListEmpty() && !isChillVisible()) {
+        console.log('pendingToDosArray is empty');
+        showChill();
+    }
 };
 
 const removePendingToDo = (ev) => {
@@ -399,6 +415,7 @@ const clearAll = () => {
     // freshen completed task %
     // fillInCompletedPercent();
     fillInToDoInfo();
+    handleIfPendingToDoListEmpty();
 }
 
 hideOrShowButton.addEventListener('click', hideOrShowComplete);
